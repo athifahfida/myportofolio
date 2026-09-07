@@ -46,7 +46,7 @@ h1, .brand {
 .brand {
     font-size: 1.3rem;
     font-weight: 700;
-    color: #ffffff; /* Mengubah warna teks nama jadi putih agar jelas */
+    color: #ffffff; 
     text-decoration: none;
 }
 
@@ -180,6 +180,7 @@ h1, .brand {
     color: var(--text-muted);
     font-size: 0.85rem;
     border-top: 1px solid var(--line);
+    text-align: center;
 }
 
 @media (max-width: 600px) {
