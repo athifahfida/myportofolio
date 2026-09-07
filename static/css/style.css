@@ -5,19 +5,19 @@
 }
 
 :root {
-    --ink: #1c1917;
-    --paper: #f0d1bc;
-    --accent: #39c1d9;
-    --accent-dark: #a8442a;
-    --line: #e3d9c9;
-    --text-muted: #6b6459;
+    --ink: #1f1f1f;
+    --paper: #A2AE9D;
+    --accent: #54463A;
+    --accent-dark: #54463A;
+    --line: #131617;
+    --text-muted: #242b36;
     --radius: 4px;
 }
-
+ 
 body {
     font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     color: var(--ink);
-    background-color: var(--paper)
+    background-color: var(--paper);
     line-height: 1.6;
 }
 
@@ -32,6 +32,7 @@ h1, .brand {
 }
 
 .site-header {
+    background-color: #272a2b; 
     border-bottom: 1px solid var(--line);
 }
 
@@ -45,7 +46,7 @@ h1, .brand {
 .brand {
     font-size: 1.3rem;
     font-weight: 700;
-    color: var(--ink);
+    color: #ffffff; /* Mengubah warna teks nama jadi putih agar jelas */
     text-decoration: none;
 }
 
@@ -55,9 +56,14 @@ h1, .brand {
 }
 
 .site-header nav a {
-    color: var(--ink);
+    color: #ffffff; 
     text-decoration: none;
     font-size: 0.95rem;
+    transition: color 0.2s ease;
+}
+
+.site-header nav a:hover {
+    color: var(--paper); 
 }
 
 .hero {
@@ -192,5 +198,177 @@ h1, .brand {
     .social-links {
         justify-content: flex-start;
         
+    }
+}
+    .skills {
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.skills-heading h2 {
+    font-family: "Space Grotesk", -apple-system, sans-serif;
+    font-size: 2.75rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+
+.skills-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.skills-divider span:not(.dot) {
+    display: block;
+    width: 100px;
+    height: 2px;
+    background-color: var(--accent);
+}
+
+.skills-divider .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--accent);
+}
+
+.skills-subtitle {
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
+    font-size: 0.95rem;
+}
+
+.skills-row {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.skill-card {
+    flex: 1 1 220px;
+    max-width: 280px;
+    background-color: #131414;
+    color: #b0a28e;
+    border-left: 6px solid #000000;
+    border-radius: var(--radius);
+    padding: 2rem 1.25rem;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.skill-card:hover {
+    transform: translateY(-6px);
+}
+
+.skill-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+.skill-card h3 {
+    font-family: "Space Grotesk", -apple-system, sans-serif;
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+}
+
+.skill-card p {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+@media (max-width: 700px) {
+    .skills-row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .skill-card {
+        max-width: 100%;
+        width: 100%;
+    }
+}
+
+.experience {
+    padding: 2rem 0 4rem;
+    text-align: center;
+}
+
+.experience-list-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: left;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.experience-card {
+    background-color: #000000;
+    color: #b0a28e;
+    border-left: 6px solid #17191e;
+    border-radius: var(--radius);
+    padding: 1.5rem 1.75rem;
+    transition: transform 0.2s ease;
+}
+
+.experience-card:hover {
+    transform: translateY(-4px);
+}
+
+.experience-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.experience-header h3 {
+    font-family: "Space Grotesk", -apple-system, sans-serif;
+    font-size: 1.05rem;
+}
+
+.experience-badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #1c2b2a;
+    background-color: #ffffff;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+.experience-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.experience-list li {
+    position: relative;
+    padding-left: 1.1rem;
+    font-size: 0.85rem;
+}
+
+.experience-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: #515356;
+}
+
+@media (max-width: 600px) {
+    .experience-header {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }
