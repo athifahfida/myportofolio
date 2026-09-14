@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
 
-from main.models import Experience
+from main.models import Experience, Certification
 
 
 class MainTest(TestCase):
@@ -56,3 +56,30 @@ class MainTest(TestCase):
         self.assertFalse(self.experience.is_ongoing)
         self.assertContains(response, "Selesai")
         self.assertNotContains(response, "Sedang berlangsung")
+
+
+class CertificationTest(TestCase):
+    def setUp(self):
+        self.certification = Certification.objects.create(
+            title="Belajar Dasar Data Science",
+            issuer="Dicoding",
+            issued_date="2026-08-01",
+        )
+
+    def test_certification_url_is_accessible(self):
+        response = self.client.get(reverse("main:show_certification"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "certification.html")
+
+    def test_certification_page_shows_data(self):
+        response = self.client.get(reverse("main:show_certification"))
+
+        self.assertContains(response, self.certification.title)
+        self.assertContains(response, self.certification.issuer)
+
+    def test_empty_certification_page(self):
+        Certification.objects.all().delete()
+        response = self.client.get(reverse("main:show_certification"))
+
+        self.assertContains(response, "Belum ada sertifikasi yang ditambahkan.")

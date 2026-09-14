@@ -24,3 +24,11 @@ class Experience(models.Model):
     @property
     def is_ongoing(self):
         return self.ended_at is None
+
+class Certification(models.Model):
+    title = models.CharField(max_length=255)
+    issuer = models.CharField(max_length=255)
+    issued_date = models.DateField()
+
+    def __str__(self):
+        return self.title
