@@ -8,10 +8,6 @@ Kelas : PBP E
 2. Ketika mengatur tata letak elemen di web saya memperioritaskan foto profil dan section lain agar tidak tertumpuk
 3. Karena saat ini web masih berbentuk static, saya  merasa bahwa web saya sedikit kosong. Kedepannya saya ingin membuat web ini menjadi lebih interaktif.
 
-
-### Tugas 2
-### Tugas 2
-
 ### Tugas 2
 
 1. Saat lama certification diakses, request masuk ke urls.py proyek,
