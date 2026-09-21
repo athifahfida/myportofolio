@@ -2,11 +2,11 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.core import serializers
 from django.http import HttpResponse
-from main.forms import ProjectForm
+from main.forms import ProjectForm, SkillForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.shortcuts import redirect, render
-from main.models import Experience, Certification, Project
+from main.models import Experience, Certification, Project, Skill
 import datetime
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
@@ -149,3 +149,78 @@ def toggle_star(request, project_id):
             project.starred_by.add(request.user)
 
     return redirect("main:show_projects")
+
+def show_skill(request):
+    skills_json = get_skills_json(request)
+    skills = serializers.deserialize(
+        "json",
+        skills_json.content.decode("utf-8"),
+    )
+    skills = [skill.object for skill in skills]
+
+    context = {
+        "name": "Athifah Mufidah",
+        "skill_list": skills,
+    }
+    return render(request, "skill.html", context)
+
+
+def get_skills_json(request):
+    skills = Skill.objects.all()
+    skills_json = serializers.serialize("json", skills)
+    return HttpResponse(skills_json, content_type="application/json")
+
+
+@login_required(login_url="/login/")
+def create_skill(request):
+    if not request.user.is_superuser:
+        raise PermissionDenied
+
+    form = SkillForm(request.POST or None)
+
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(request, "Skill baru berhasil ditambahkan!")
+        return redirect("main:show_skill")
+
+    context = {
+        "name": "Athifah Mufidah",
+        "form": form,
+    }
+    return render(request, "skill_form.html", context)
+
+
+@login_required(login_url="/login/")
+def update_skill(request, skill_id):
+    skill = get_object_or_404(Skill, pk=skill_id)
+
+    if not request.user.is_superuser:
+        raise PermissionDenied
+
+    form = SkillForm(request.POST or None, instance=skill)
+
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(request, "Skill berhasil diperbarui!")
+        return redirect("main:show_skill")
+
+    context = {
+        "name": "Athifah Mufidah",
+        "form": form,
+    }
+    return render(request, "skill_form.html", context)
+
+
+@login_required(login_url="/login/")
+def delete_skill(request, skill_id):
+    skill = get_object_or_404(Skill, pk=skill_id)
+
+    if not request.user.is_superuser:
+        raise PermissionDenied
+
+    if request.method == "POST":
+        skill.delete()
+        messages.success(request, "Skill berhasil dihapus!")
+        return redirect("main:show_skill")
+
+    return redirect("main:show_skill")

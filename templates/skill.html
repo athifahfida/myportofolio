@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block meta %}
+    <title>Skills - {{ name }}</title>
+{% endblock meta %}
+{% block content %}
+<main>
+  <section class="experience-section">
+    <div class="container">
+      <h1>Skills</h1>
+
+      {% if user.is_superuser %}
+        <a href="{% url 'main:create_skill' %}" class="button project-add-button">
+          <span aria-hidden="true">+</span> Tambah Skill
+        </a>
+      {% endif %}
+
+      <ul class="skill-list">
+        {% for skill in skill_list %}
+          <li class="skill-item">
+            <strong>{{ skill.name }}</strong>
+            — {{ skill.get_category_display }} ({{ skill.get_proficiency_display }})
+
+            {% if user.is_superuser %}
+              <a href="{% url 'main:update_skill' skill.id %}">Edit</a>
+              <form method="post" action="{% url 'main:delete_skill' skill.id %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">Delete</button>
+              </form>
+            {% endif %}
+          </li>
+        {% empty %}
+          <p>Belum ada skill yang ditambahkan.</p>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+</main>
+{% endblock content %}

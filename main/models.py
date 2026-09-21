@@ -47,3 +47,27 @@ class Project(models.Model):
 
     def __str__(self):
         return self.title
+
+class Skill(models.Model):
+    CATEGORY_CHOICES = [
+        ('frontend', 'Frontend'),
+        ('backend', 'Backend'),
+        ('tools', 'Tools'),
+        ('soft', 'Soft Skill'),
+    ]
+    PROFICIENCY_CHOICES = [
+        ('beginner', 'Beginner'),
+        ('intermediate', 'Intermediate'),
+        ('advanced', 'Advanced'),
+        ('expert', 'Expert'),
+    ]
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=100)
+    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
+    proficiency = models.CharField(max_length=20, choices=PROFICIENCY_CHOICES)
+    icon_url = models.URLField(blank=True, max_length=500)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
