@@ -52,7 +52,7 @@ def create_project(request):
         return redirect("main:show_projects")
 
     context = {
-        "name": "Burhan",
+        "name": "Athifah Mufidah",
         "form": form,
     }
     return render(request, "projects_form.html", context)
