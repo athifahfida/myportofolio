@@ -68,6 +68,9 @@ class Skill(models.Model):
     proficiency = models.CharField(max_length=20, choices=PROFICIENCY_CHOICES)
     icon_url = models.URLField(blank=True, max_length=500)
     timestamp = models.DateTimeField(auto_now_add=True)
+    starred_by = models.ManyToManyField(
+        User, related_name="starred_skills", blank=True
+    )
 
     def __str__(self):
         return self.name
