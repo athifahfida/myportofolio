@@ -534,30 +534,31 @@ h1, .brand {
         width: 100%;
         text-align: center;
     }
+}
 
-    .star-form {
+.star-form {
     display: inline;
-    }
+}
 
-    .button-star {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.4rem;
-        background: var(--ink);
-    }
+.button-star {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--ink);
+}
 
-    .button-star.is-starred {
-        background: var(--accent);
-    }
+.button-star.is-starred {
+    background: var(--accent);
+}
 
-    .star-count {
-        padding: 0.05rem 0.4rem;
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.25);
-        font-size: 0.8rem;
-    }
+.star-count {
+    padding: 0.05rem 0.4rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.25);
+    font-size: 0.8rem;
+}
 
-    .project-form-modal {
+.project-form-modal {
     display: none;
     position: fixed;
     inset: 0;
@@ -650,4 +651,13 @@ h1, .brand {
         text-align: center;
     }
 }
+
+/* ===== Skills ===== */
+.skill-list {
+    list-style: none;
+}
+
+.skill-item {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--line);
 }

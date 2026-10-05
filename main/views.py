@@ -285,24 +285,17 @@ def create_skill_ajax(request):
 
 
 @require_POST
+@login_required(login_url="/login/")
 def toggle_star_skill(request, skill_id):
-    if not request.user.is_authenticated:
-        return JsonResponse(
-            {"message": "Login dulu untuk memberi star."}, status=403
-        )
-
     skill = get_object_or_404(Skill, pk=skill_id)
-    if skill.starred_by.filter(pk=request.user.pk).exists():
-        skill.starred_by.remove(request.user)
-        starred = False
-    else:
-        skill.starred_by.add(request.user)
-        starred = True
 
-    return JsonResponse(
-        {"starred": starred, "star_count": skill.starred_by.count()}
-    )
+    if request.method == "POST":
+        if skill.starred_by.filter(pk=request.user.pk).exists():
+            skill.starred_by.remove(request.user)
+        else:
+            skill.starred_by.add(request.user)
 
+    return redirect("main:show_skill")
 
 @login_required(login_url="/login/")
 def create_skill(request):
