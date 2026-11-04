@@ -50,6 +50,7 @@
         {% include "components/project_form_modal.html" %}
     {% endif %}
 
+    {% csrf_token %}
     <script>
     const BASE_PROJECTS_ENDPOINT = "{% url 'main:get_projects_json' %}";
     const CREATE_PROJECT_ENDPOINT = "{% url 'main:create_project_ajax' %}";
