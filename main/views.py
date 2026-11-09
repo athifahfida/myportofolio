@@ -218,9 +218,13 @@ def toggle_star(request, project_id):
 # ---------------------------- SKILL (AJAX) ----------------------------
 
 def show_skill(request):
+    user = request.user
+    can_edit = user.is_authenticated and (user.is_superuser or is_editor(user))
     context = {
         "name": "Athifah Mufidah",
-        "form": SkillForm() if request.user.is_superuser else None,
+        "form": SkillForm() if user.is_superuser else None,
+        "edit_form": SkillForm(auto_id="edit_%s") if can_edit else None,
+        "can_edit": can_edit,
     }
     return render(request, "skill.html", context)
 
