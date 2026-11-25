@@ -44,17 +44,6 @@ class Project(models.Model):
     starred_by = models.ManyToManyField(
         User, related_name="starred_projects", blank=True
     )
-
-    def __str__(self):
-        return self.title
-
-class Skill(models.Model):
-    CATEGORY_CHOICES = [
-        ('frontend', 'Frontend'),
-        ('backend', 'Backend'),
-        ('tools', 'Tools'),
-        ('soft', 'Soft Skill'),
-    ]
     PROFICIENCY_CHOICES = [
         ('beginner', 'Beginner'),
         ('intermediate', 'Intermediate'),
